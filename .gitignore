@@ -12,8 +12,8 @@ db.*
 ######################
 *.env
 **/.pytest**
-.idea/
+../.idea/
 node_modules
 dumps/
 docker/
-docker-compose.yaml
+app/dockerfiles/docker-compose.yaml

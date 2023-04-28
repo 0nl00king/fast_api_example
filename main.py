@@ -1,21 +1,26 @@
+from common import config
 import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.routing import APIRouter
+
+from handlers.user import user_router
+from handlers.auth import login_router
 
 
-class User(BaseModel):
-    first_name: str
-    last_name: str = None
-    state: int
+app = FastAPI(
+    title="FastAPI Project API",
+    description="A simple API for project",
+    version="0.0.1",
+)
 
+# create the instance for the routes
+main_api_router = APIRouter()
 
-app = FastAPI()
-
-
-@app.post("/user/", response_model=User)
-async def create_user(user: User):
-    return user
+# set routes to the app instance
+main_api_router.include_router(user_router, prefix="/user", tags=["user"])
+main_api_router.include_router(login_router, prefix="/login", tags=["login"])
+app.include_router(main_api_router)
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host=config.APP_HOST, port=config.APP_PORT)

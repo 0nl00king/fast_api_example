@@ -1,8 +1,41 @@
-# FAST API example Endpoint 
+# FastAPI App
+Библиотеки: 
+    alembic,
+    sqlalchemy,
+    fastapi-users,
+    fastapi-cache,
+    celery,
+    redis,
+    jinja.
 
-Simple example for FAST API example
+Технологии:
+    аутентификация пользователей (fastapi-users),
+    кэширование запросов (redis),
+    отложенные задачи (celery + redis),
+    тестирование (pytest).
 
-this repo is used for medium article about FAST API
-[link to article](https://medium.com/@ahmed.nafies/why-did-we-choose-fast-api-over-flask-and-django-for-our-restful-micro-services-77589534c036)
+Фронтенд:
+    react.
 
+## Инструкция
+    
+    `/HOST:8000/docs` - просмотр доступных эндпоинтов.
+    `/HOST:8000/redoc` - просмотр доступных эндпоинтов.
 
+    alembic init migration
+    alembic revision --autogenerate -m 'some msg'
+    # Example: alembic revision --autogenerate -m 'DB creation'
+    alembic upgrade head
+    alembic downgrade 'SOME_HEAD'- хеш обновления
+
+    Для накатывания миграций, если файла alembic.ini ещё нет, нужно запустить в терминале команду:
+    
+    alembic init migrations
+    После этого будет создана папка с миграциями и конфигурационный файл для алембика.
+    
+    В alembic.ini нужно задать адрес базы данных, в которую будем катать миграции.
+    Дальше идём в папку с миграциями и открываем env.py, там вносим изменения в блок, где написано
+    from myapp import mymodel
+    Дальше вводим: alembic revision --autogenerate -m "comment" - делается при любых изменениях моделей
+    Будет создана миграция
+    Дальше вводим: alembic upgrade heads
