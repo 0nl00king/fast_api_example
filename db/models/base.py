@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
+
 from sqlalchemy import (
     MetaData,
     Column,
@@ -9,7 +10,7 @@ from sqlalchemy import (
     TIMESTAMP,
     ForeignKey,
     JSON,
+    Boolean,
 )
-Base = declarative_base()
 
-metadata = MetaData()
+Base = declarative_base(metadata=MetaData())

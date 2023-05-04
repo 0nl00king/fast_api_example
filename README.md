@@ -19,10 +19,10 @@
 
 ## Инструкция
     
-    `/HOST:8000/docs` - просмотр доступных эндпоинтов.
-    `/HOST:8000/redoc` - просмотр доступных эндпоинтов.
+    `/HOST:PORT/docs` - просмотр доступных эндпоинтов.
+    `/HOST:PORT/redoc` - просмотр доступных эндпоинтов.
 
-    alembic init migration
+    alembic init migrations (migrations - name of dirictory)
     alembic revision --autogenerate -m 'some msg'
     # Example: alembic revision --autogenerate -m 'DB creation'
     alembic upgrade head

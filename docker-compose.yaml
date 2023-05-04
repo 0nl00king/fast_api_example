@@ -1,15 +1,13 @@
 version: "3.9"
 
-x-environment:
-  moscow: &moscow-time
-    TZ=Europe/Moscow
-
 services:
   db:
     image: postgres:14.1-alpine
     restart: always
+    volumes:
+      - ./dockerfiles/postgres/init/create_databases.sh:/docker-entrypoint-initdb.d/create_databases.sh
+      - ./docker/postgres:/var/lib/postgresql/data
     environment:
-      - *moscow-time
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_NAME}
@@ -23,13 +21,11 @@ services:
     image: app
 
   rest:
-    image: docker.stm/gov2022/app
+    image: app
     volumes:
       - .:/code
-    environment:
-      - *moscow-time
-#    command: sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
-    command: python main.py main:app 0.0.0.0 8000
+#    command: alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: python main.py
     ports:
       - "8000:8000"
     depends_on:

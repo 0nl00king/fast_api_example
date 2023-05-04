@@ -8,7 +8,7 @@ DB_PASS = env.str("DB_PASS", default='postgres')
 
 DB_URL = env.str(
     "DB_URL",
-    default='postgresql+asyncpg://postgres:postgres@db:5432/postgres',
-)  # connect string for the real database
+    default="postgresql+asyncpg://postgres:postgres@db:5432/postgres?async_fallback=True",
+)
 APP_PORT = env.int("APP_PORT", default=8000)
-APP_HOST = env.str("APP_PORT", default='0.0.0.0')
+APP_HOST = env.str("APP_HOST", default='rest')
