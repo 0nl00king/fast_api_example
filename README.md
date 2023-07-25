@@ -38,4 +38,4 @@
     from myapp import mymodel
     Дальше вводим: alembic revision --autogenerate -m "comment" - делается при любых изменениях моделей
     Будет создана миграция
-    Дальше вводим: alembic upgrade heads
+    Дальше вводим: alembic upgrade head

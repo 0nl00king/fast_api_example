@@ -11,6 +11,7 @@ from sqlalchemy import (
     ForeignKey,
     JSON,
     Boolean,
+    ARRAY,
 )
 
 Base = declarative_base(metadata=MetaData())

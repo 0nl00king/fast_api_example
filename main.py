@@ -14,6 +14,7 @@ from fastapi.responses import JSONResponse
 
 from fastapi.routing import APIRouter
 
+from api.handlers.auth import auth_router
 from api.handlers.user import user_router
 
 from config import (
@@ -32,6 +33,7 @@ main_api_router = APIRouter()
 
 # set routes to the app instance
 main_api_router.include_router(user_router, prefix="/user", tags=["user"])
+main_api_router.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(main_api_router)
 
 
