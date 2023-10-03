@@ -46,8 +46,8 @@ async def get_current_user_from_token(
         username: str = payload.get("sub")
         if not username:
             raise credentials_exception
-    except JWTError:
-        raise credentials_exception
+    except JWTError as e:
+        raise credentials_exception from e
     user = await _get_user_by_email_for_auth(email=username, session=session)
     if not user:
         raise credentials_exception

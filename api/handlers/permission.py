@@ -23,11 +23,12 @@ from api.schemas.user import UpdatedUserResponse
 
 logger = getLogger(__name__)
 
+
 @user_router.patch("/admin_privilege", response_model=UpdatedUserResponse)
 async def grant_admin_privilege(
-    user_id: int,
-    session: AsyncSession = Depends(get_async_session),
-    current_user: User = Depends(get_current_user_from_token),
+        user_id: int,
+        session: AsyncSession = Depends(get_async_session),
+        current_user: User = Depends(get_current_user_from_token),
 ):
     if not current_user.is_superadmin:
         raise HTTPException(status_code=403, detail='Forbidden.')
@@ -65,9 +66,9 @@ async def grant_admin_privilege(
 
 @user_router.delete("/admin_privilege", response_model=UpdatedUserResponse)
 async def revoke_admin_privilege(
-    user_id: int,
-    session: AsyncSession = Depends(get_async_session),
-    current_user: User = Depends(get_current_user_from_token),
+        user_id: int,
+        session: AsyncSession = Depends(get_async_session),
+        current_user: User = Depends(get_current_user_from_token),
 ):
     if not current_user.is_superadmin:
         raise HTTPException(status_code=403, detail='Forbidden.')

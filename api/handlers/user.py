@@ -43,7 +43,7 @@ async def create_user(
         return await _create_new_user(body, session)
     except IntegrityError as e:
         logger.error(e)
-        raise HTTPException(status_code=503, detail=f'DB ERROR: {e}')
+        raise HTTPException(status_code=503, detail=f'DB ERROR: {e}') from e
 
 
 @user_router.get('/', response_model=ShowUser)
@@ -93,7 +93,7 @@ async def update_user_by_id(
         )
     except IntegrityError as e:
         logger.error(e)
-        raise HTTPException(status_code=503, detail=f'DB ERROR: {e}')
+        raise HTTPException(status_code=503, detail=f'DB ERROR: {e}') from e
     return UpdatedUserResponse(updated_user_id=updated_user_id)
 
 
